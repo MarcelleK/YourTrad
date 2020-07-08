@@ -2,6 +2,7 @@ package org.libreapps.yourtrad;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -14,17 +15,26 @@ import org.json.JSONObject;
 
 public class InscriptionActivity extends AppCompatActivity {
 
+    private EditText firstname;
+    private EditText lastname;
+    private EditText username;
+    private EditText email;
+    private EditText password;
+
+    private Button buttonValidate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
 
-        final EditText firstNameEditText = (EditText) findViewById(R.id.edittext_firstname);
-        final EditText lastNameEditText = (EditText) findViewById(R.id.edittext_lastname);
-        final EditText emailEditText = (EditText) findViewById(R.id.edittext_email);
-        final EditText passwordEditText = (EditText) findViewById(R.id.edittext_password);
+        firstname = (EditText) findViewById(R.id.edittext_firstname);
+        lastname  = (EditText) findViewById(R.id.edittext_lastname);
+        //username  = (EditText) findViewById(R.id.edittext_lastname);
+        email     = (EditText) findViewById(R.id.edittext_email);
+        password  = (EditText) findViewById(R.id.edittext_password);
 
-        Button buttonValidate = (Button) findViewById(R.id.button_validate);
+        buttonValidate = (Button) findViewById(R.id.button_validate);
 
         buttonValidate.setOnClickListener(new View.OnClickListener() {
 
@@ -32,18 +42,20 @@ public class InscriptionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
 
-                    ConnectionRest connectionRest = new ConnectionRest();
+                    ConnectionRest connectionRest = new ConnectionRest("user");
                     JSONObject user = new JSONObject();
-                    user.put("nom", lastNameEditText.getText().toString());
-                    user.put("prenom", firstNameEditText.getText().toString());
-                    user.put("email", emailEditText.getText().toString());
-                    user.put("password", passwordEditText.getText().toString());
+                    user.put("prenom", firstname.getText().toString());
+                    user.put("nom", lastname.getText().toString());
+                    user.put("email", email.getText().toString());
+                    user.put("password", password.getText().toString());
                     connectionRest.setJsonObj(user);
-                    connectionRest.execute("POST");
+                    //connectionRest.execute("CREATE_USER");
+                    String token = (String) connectionRest.get("CREATE_USER");
 
-
-                    Intent intent = new Intent(InscriptionActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(InscriptionActivity.this, MainActivity.class);
+                    intent.putExtra("token", token);
                     startActivity(intent);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

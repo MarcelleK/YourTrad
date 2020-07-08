@@ -22,13 +22,23 @@ import static android.net.wifi.WifiConfiguration.Status.strings;
 
 public class ConnectionRest extends AsyncTask {
 
-    private final static String URL = "https://api.munier.me/apmk/";
+    private final static String URL = "http://127.0.0.1:5000/";
+    private String action = "";
     private JSONObject jsonObj = null;
+    private String token = null;
+
+    public ConnectionRest() {
+        Log.v("MISC", "Test du log");
+    }
+
+    public ConnectionRest(String action) {
+        this.action = action;
+        Log.i("URL", this.action);
+    }
 
     @Override
     protected Object doInBackground(Object[] objects) {
         try {
-
             return get(strings[0].toString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,23 +49,28 @@ public class ConnectionRest extends AsyncTask {
     }
 
     public String get(String methode) throws IOException, JSONException {
-        String url = URL;
+        String url = URL + action ;
         InputStream is = null;
         String parameters = "";
-        Log.v("methode", methode);
-        if(!methode.equals("POST")&&(jsonObj!=null)){
+        if(!methode.equals("POST")&&(jsonObj!=null)&&!methode.equals("CREATE_USER")){
             url += jsonObj.getInt("id");
         }
         if(jsonObj != null){
             if(methode.equals("PUT")){
                 jsonObj.remove("id");
             }
-            parameters  = "data="+ URLEncoder.encode(jsonObj.toString(), "utf-8");
-            Log.v("URL", url+" "+parameters);
+            parameters  = "data="+URLEncoder.encode(jsonObj.toString(), "utf-8");
+            //Log.v("URL", url+" "+parameters);
+        }
+        if (methode.equals("CREATE_USER")) {
+            methode = "POST";
         }
         try {
             final HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod(methode);
+            if (token != null) {
+                conn.setRequestProperty("Authorization", "Bearer " + URLEncoder.encode(token, "utf-8"));
+            }
 
             // Pour les methode POST et PUT on envoie les parametre avec l'OutputStreamWriter
             if(methode.equals("POST")||methode.equals("PUT")){
@@ -111,5 +126,8 @@ public class ConnectionRest extends AsyncTask {
         }
         return null;
     }
+
+    public void setAction(String action){ this.action = action;};
+    public void setToken(String token)  { this.token  = token ;};
 }
 

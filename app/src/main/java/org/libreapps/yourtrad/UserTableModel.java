@@ -1,7 +1,9 @@
 package org.libreapps.yourtrad;
 
+import org.json.JSONException;
 import org.libreapps.yourtrad.obj.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
