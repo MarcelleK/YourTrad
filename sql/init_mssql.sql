@@ -24,23 +24,24 @@ USE [YOURTRAD];
 
 /* Création de la table USER */
 
-/*
+
 CREATE TABLE [USER]
 (
-id INT NOT NULL,
+id INT NOT NULL IDENTITY,
 firstname NVARCHAR(50),
 lastname NVARCHAR(50),
 username NVARCHAR(50),
 birthdate DATE,
 email NVARCHAR(130),
 pays NVARCHAR(70),
-password NVARCHAR(70),
+password NVARCHAR(64),
 CONSTRAINT USER_PK PRIMARY KEY NONCLUSTERED (id) ON[PRIMARY]
 );
-*/
+
 
 /* Création de la table TRADUCTION_1GRAM */
 
+/*
 CREATE TABLE [USER_HISTORY]
 (
 id INT NOT NULL,
@@ -52,6 +53,7 @@ translated_to NVARCHAR(50),
 CONSTRAINT USER_HISTORY_PK PRIMARY KEY NONCLUSTERED (id) ON[PRIMARY],
 FOREIGN KEY (id_user) REFERENCES [USER](id)
 );
+*/
 
 /* Création de la table TRADUCTION_1GRAM */
 
