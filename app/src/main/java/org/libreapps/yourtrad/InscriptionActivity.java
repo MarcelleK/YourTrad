@@ -13,47 +13,54 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
-public class InscriptionActivity extends AppCompatActivity {
+public class InscriptionActivity extends AppCompatActivity
+{
 
-    private EditText firstname;
-    private EditText lastname;
-    private EditText username;
-    private EditText email;
-    private EditText password;
+    private String firstname;
+    private String lastname;
+    private String username;
+    private String email;
+    private String password;
 
     private Button buttonValidate;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
 
-        firstname = (EditText) findViewById(R.id.edittext_firstname);
-        lastname  = (EditText) findViewById(R.id.edittext_lastname);
-        //username  = (EditText) findViewById(R.id.edittext_lastname);
-        email     = (EditText) findViewById(R.id.edittext_email);
-        password  = (EditText) findViewById(R.id.edittext_password);
-
         buttonValidate = (Button) findViewById(R.id.button_validate);
 
-        buttonValidate.setOnClickListener(new View.OnClickListener() {
+        buttonValidate.setOnClickListener(new View.OnClickListener()
+        {
 
             @Override
-            public void onClick(View v) {
-                try {
+            public void onClick(View v)
+            {
 
+                firstname = ((EditText) findViewById(R.id.edittext_firstname)).getText().toString();
+                lastname  = ((EditText) findViewById(R.id.edittext_lastname)).getText().toString();
+                email     = ((EditText) findViewById(R.id.edittext_email)).getText().toString();
+                password  = ((EditText) findViewById(R.id.edittext_password)).getText().toString();
+
+                try
+                {
                     ConnectionRest connectionRest = new ConnectionRest("user");
                     JSONObject user = new JSONObject();
-                    user.put("prenom", firstname.getText().toString());
-                    user.put("nom", lastname.getText().toString());
-                    user.put("email", email.getText().toString());
-                    user.put("password", password.getText().toString());
-                    connectionRest.setJsonObj(user);
-                    //connectionRest.execute("CREATE_USER");
-                    String token = (String) connectionRest.get("CREATE_USER");
+                    user.put("firstname", firstname);
+                    user.put("lastname", lastname);
+                    user.put("email", email);
+                    user.put("password", password);
+                    connectionRest.setObj(user);
+                    connectionRest.execute("POST");
 
-                    Intent intent = new Intent(InscriptionActivity.this, MainActivity.class);
-                    intent.putExtra("token", token);
+                    String response = connectionRest.get();
+                    JSONObject obj = new JSONObject(response);
+                    String res = obj.getString("response");
+
+                    Intent intent = new Intent(InscriptionActivity.this, Rest_Response.class);
+                    intent.putExtra("response", res);
                     startActivity(intent);
 
                 } catch (Exception e) {
@@ -61,7 +68,6 @@ public class InscriptionActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @Override

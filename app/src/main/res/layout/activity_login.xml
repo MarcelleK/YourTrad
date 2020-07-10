@@ -43,7 +43,7 @@
         app:srcCompat="@drawable/logo_multilanguage" />
 
         <EditText
-            android:id="@+id/edittext_username"
+            android:id="@+id/edittext_email"
             style="@style/Widget.AppCompat.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageview_logo" />
 
         <EditText
-            android:id="@+id/edittxt_password"
+            android:id="@+id/edittext_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

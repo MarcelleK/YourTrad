@@ -13,15 +13,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.ExecutionException;
+
 public class LoginActivity extends AppCompatActivity {
+
+    private String email;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        final EditText emailEditTxt = (EditText) findViewById(R.id.edittext_username);
-        final EditText passwordEditTxt = (EditText) findViewById(R.id.edittxt_password);
 
         Button buttonLogin = (Button) findViewById(R.id.button_login);
 
@@ -29,20 +31,28 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                ConnectionRest connectionRest = new ConnectionRest();
+                email     = ((EditText) findViewById(R.id.edittext_email)).getText().toString();
+                password  = ((EditText) findViewById(R.id.edittext_password)).getText().toString();
+
+                ConnectionRest connectionRest = new ConnectionRest("login");
                 JSONObject user = new JSONObject();
 
                 try {
-                    user.put("email", emailEditTxt.getText().toString());
-                    user.put("password", passwordEditTxt.getText().toString());
+                    user.put("email", email);
+                    user.put("password", password);
 
-                    connectionRest.setJsonObj(user);
+                    connectionRest.setObj(user);
+                    connectionRest.execute("POST");
 
+                    String response = connectionRest.get();
+                    JSONObject obj = new JSONObject(response);
 
-                    Intent intent = new Intent(LoginActivity.this, LanguageChoice.class);
+                    Intent intent = new Intent(LoginActivity.this, Rest_Response.class);
+                    intent.putExtra("token", obj.getString("token"));
+                    intent.putExtra("response", obj.getString("response"));
                     startActivity(intent);
 
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 

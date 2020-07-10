@@ -13,82 +13,74 @@
     tools:context=".LanguageChoice">
 
     <LinearLayout
-        android:id="@+id/linear_layout_center"
+        android:id="@+id/linear_layout"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textview_translate_from"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:text="@string/prompt_translate_from"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            app:layout_constraintBottom_toTopOf="@+id/spinner1" />
+        android:layout_alignParentBottom="true"
+        android:gravity="top"
+        android:layout_gravity="top"
+        tools:ignore="MissingConstraints">
 
         <Spinner
             android:id="@+id/spinner_translate_from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"/>
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
 
         <TextView
-            android:id="@+id/textview_translate_to"
+            android:id="@+id/textview_traduction_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1.3"
             android:gravity="center"
-            android:text="@string/prompt_translate_to"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/spinner_translate_from"/>
+            android:layout_gravity="center"
+            android:text="@string/prompt_vers"
+            android:textColor="#FFFFFF"/>
 
         <Spinner
             android:id="@+id/spinner_translate_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toTopOf="@+id/textview_translate_to" />
-
-
-        <TextView
-            android:id="@+id/textview_traduction_level"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/prompt_traduction_level"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/spinner_translate_to"/>
-
-        <Spinner
-            android:id="@+id/spinner_traduction_level"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toTopOf="@+id/textview_traduction_level" />
-
-        <Button
-            android:id="@+id/next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:enabled="true"
-            android:text="@string/prompt_next"
-            app:layout_constraintBottom_toTopOf="@+id/spinner_traduction_level" />
+            android:spinnerMode="dropdown"/>
 
     </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spinner_traduction_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="0"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout" />
+
+    <EditText
+        android:id="@+id/edittext_translate_input"
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:lines="17"
+        android:textColor="#FFFFFF"
+        android:hint="Écrivez ici le texte que vous souhaitez traduire."
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_traduction_level"
+    />
+
+    <Button
+        android:id="@+id/button_validate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:enabled="true"
+        android:text="@string/prompt_next"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_translate_input" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

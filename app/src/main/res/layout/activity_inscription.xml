@@ -49,8 +49,8 @@
             android:gravity="center"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/prompt_first_name"
-            android:textColor="#FFFFFF"
+            android:hint="@string/prompt_first_name"
+            android:textColor="#000000"
             app:layout_constraintTop_toBottomOf="@+id/imageview_logo"
             app:layout_constraintBottom_toTopOf="@+id/edittext_lastname" />
 
@@ -61,8 +61,8 @@
             android:gravity="center"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/prompt_last_name"
-            android:textColor="#FFFFFF"
+            android:hint="@string/prompt_last_name"
+            android:textColor="#000000"
             app:layout_constraintTop_toBottomOf="@+id/edittext_firstname"
             app:layout_constraintBottom_toTopOf="@+id/edittext_email" />
 
@@ -73,9 +73,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Email"
-            android:textColor="#FFFFFF"
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            android:textColor="#000000"
             app:layout_constraintTop_toBottomOf="@+id/edittext_lastname"
             app:layout_constraintBottom_toTopOf="@+id/edittext_password" />
 
@@ -85,9 +85,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Mot de passe"
-            android:textColor="#FFFFFF"
+            android:inputType="textPassword"
+            android:hint="Mot de passe"
+            android:textColor="#000000"
             app:layout_constraintTop_toBottomOf="@+id/edittext_email"
             app:layout_constraintBottom_toTopOf="@+id/edittext_password_confirmation"/>
 

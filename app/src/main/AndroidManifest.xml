@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.libreapps.yourtrad">
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.libreapps.yourtrad">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +20,7 @@
         <activity android:name=".LanguageChoice" />
         <activity android:name=".LoginActivity" android:label="@string/title_activity_login" />
         <activity android:name=".TraductionChoiceActivity" />
+        <activity android:name=".Rest_Response" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,9 +17,13 @@
     <string name="prompt_translate_to">Vers</string>
     <string name="prompt_next">Suivant</string>
     <string name="prompt_traduction_level">Niveau de traduction</string>
+    <string name="prompt_resultat">Résultat</string>
+    <string name="prompt_vers">vers</string>
 
     <string name="action_login">Se connecter</string>
+    <string name="action_translate">Traduire</string>
     <string name="action_register">S\'inscrire</string>
+
     <string name="welcome">"Bienvenue sur YourTrad"</string>
     <string name="invalid_username">Utilisateur inconnu! Créez un nouveau compte</string>
     <string name="invalid_password">Mot de passe invalide</string>
